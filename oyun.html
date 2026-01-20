@@ -1,0 +1,583 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detaylı Defusal Kılavuzu</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Courier+Prime:wght@400;700&display=swap" rel="stylesheet">
+
+    <style>
+        body {
+            background-color: #ffffff;
+            color: #111;
+            font-family: 'Courier Prime', monospace;
+            margin: 0;
+            padding: 20px;
+            font-size: 15px;
+            line-height: 1.5;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        /* Navigasyon */
+        .nav-bar {
+            background: #f4f4f4;
+            border-bottom: 4px solid #000;
+            padding: 15px 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        .nav-bar a {
+            color: #000;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 0.85em;
+            margin: 5px 10px;
+            display: inline-block;
+            text-transform: uppercase;
+            padding: 5px 10px;
+            border: 1px solid transparent;
+        }
+
+        .nav-bar a:hover {
+            border: 1px solid #000;
+            background-color: #ddd;
+        }
+
+        /* Modül Kartları */
+        .module-card {
+            border: 4px solid #000;
+            padding: 30px;
+            margin-bottom: 50px;
+            background-color: #fff;
+            position: relative;
+            page-break-inside: avoid;
+        }
+
+        /* Resim Alanı */
+        .module-img {
+            float: right;
+            width: 220px;
+            margin-left: 25px;
+            margin-bottom: 15px;
+            border: 2px solid #000;
+            padding: 5px;
+            background: #eee;
+        }
+        
+        .module-img img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        /* Başlıklar */
+        h1 {
+            font-size: 1.8em;
+            text-transform: uppercase;
+            border-bottom: 3px solid #000;
+            padding-bottom: 10px;
+            margin-top: 0;
+            letter-spacing: -1px;
+        }
+
+        h2 {
+            font-size: 1.2em;
+            text-decoration: underline;
+            margin-top: 30px;
+            margin-bottom: 15px;
+            font-weight: 700;
+            background-color: #f9f9f9;
+            display: inline-block;
+            padding: 2px 5px;
+        }
+
+        .flavor-text {
+            font-style: italic;
+            color: #666;
+            font-size: 0.95em;
+            margin-bottom: 25px;
+            border-left: 3px solid #ccc;
+            padding-left: 10px;
+        }
+
+        /* Maddeler */
+        ul, ol {
+            padding-left: 25px;
+            margin-top: 5px;
+        }
+        
+        li {
+            margin-bottom: 8px;
+        }
+
+        /* Tablolar */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            font-size: 0.95em;
+        }
+
+        th, td {
+            border: 2px solid #000;
+            padding: 8px;
+            text-align: center;
+        }
+
+        th {
+            background-color: #e0e0e0;
+            text-transform: uppercase;
+        }
+
+        /* Önemli Vurgular */
+        strong {
+            font-weight: 700;
+            background-color: #ffffcc; /* Vurgulanan yerler sarımsı */
+            padding: 0 2px;
+        }
+
+        .difficulty {
+            font-weight: bold;
+            border-top: 2px dashed #000;
+            margin-top: 30px;
+            padding-top: 10px;
+            text-align: right;
+            text-transform: uppercase;
+            font-size: 1.1em;
+        }
+
+        .step-box {
+            border: 1px solid #000;
+            padding: 15px;
+            margin: 10px 0;
+            background: #fafafa;
+        }
+
+        .clearfix::after {
+            content: "";
+            clear: both;
+            display: table;
+        }
+
+        /* Mobil */
+        @media (max-width: 768px) {
+            .module-img {
+                float: none;
+                width: 100%;
+                margin: 0 0 20px 0;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="nav-bar">
+    <a href="#wires">Kablolar</a>
+    <a href="#button">Düğme</a>
+    <a href="#hex">Hex</a>
+    <a href="#tiles">Karolar</a>
+    <a href="#keypads">Tuşlar</a>
+    <a href="#binary">İkili</a>
+    <a href="#math">Matematik</a>
+    <a href="#color">Renk</a>
+    <a href="#multi">Çoklu</a>
+    <a href="#morse">Mors</a>
+    <a href="#timing">Zaman</a>
+    <a href="#divisibility">Bölme</a>
+    <a href="#needy">İlgi</a>
+</div>
+
+<div class="container">
+
+    <div id="wires" class="module-card clearfix">
+        <div class="module-img"><img src="wires.jpg" alt="Kablo Resmi"></div>
+        <h1>On the Subject of Wires (Kablolar)</h1>
+        <div class="flavor-text">Kablolar olmadan bomba imha oyunu olmaz. Cidden.</div>
+        <p>Aşağıdaki kuralları <strong>yukarıdan aşağıya doğru</strong> sırayla oku. Kablo sayısı kaç ise o bölüme bak.</p>
+
+        <div class="step-box">
+            <h2>3 Kablo Varsa:</h2>
+            <ul>
+                <li>Eğer hiç <strong>Kırmızı</strong> kablo yoksa: <strong>Birinci</strong> kabloyu kes.</li>
+                <li>Aksi takdirde, eğer <strong>Beyaz</strong> bir kablo varsa: <strong>İkinci</strong> kabloyu kes.</li>
+                <li>Aksi takdirde, eğer <strong>Mavi</strong> bir kablo varsa: <strong>Sonuncu</strong> kabloyu kes.</li>
+            </ul>
+        </div>
+
+        <div class="step-box">
+            <h2>4 Kablo Varsa:</h2>
+            <ul>
+                <li>Eğer hiç <strong>Yeşil</strong> kablo yoksa: <strong>Birinci</strong> kabloyu kes.</li>
+                <li>Aksi takdirde, eğer hiç <strong>Mavi</strong> kablo yoksa: <strong>İkinci</strong> kabloyu kes.</li>
+                <li>Aksi takdirde, eğer hiç <strong>Beyaz</strong> kablo yoksa: <strong>Üçüncü</strong> kabloyu kes.</li>
+                <li>Yukarıdakilerin hiçbiri uymuyorsa: <strong>Sonuncu</strong> kabloyu kes.</li>
+            </ul>
+        </div>
+
+        <div class="step-box">
+            <h2>5 Kablo Varsa:</h2>
+            <ul>
+                <li>Eğer modülün üzerindeki ışık <strong>Kırmızı</strong> ise: <strong>Birinci</strong> kabloyu kes.</li>
+                <li>Aksi takdirde, eğer ışık <strong>Yeşil</strong> ise: <strong>İkinci</strong> kabloyu kes.</li>
+                <li>Aksi takdirde, eğer ışık <strong>Mavi</strong> ise: <strong>Üçüncü</strong> kabloyu kes.</li>
+                <li>Aksi takdirde, eğer ışık <strong>Sarı</strong> ise: <strong>Dördüncü</strong> kabloyu kes.</li>
+                <li>Yukarıdakilerin hiçbiri uymuyorsa: <strong>Sonuncu</strong> kabloyu kes.</li>
+            </ul>
+        </div>
+        <div class="difficulty">Zorluk: Kolay</div>
+    </div>
+
+    <div id="button" class="module-card clearfix">
+        <div class="module-img"><img src="button.jpg" alt="Düğme Resmi"></div>
+        <h1>On the Subject of The Button (Düğme)</h1>
+        <div class="flavor-text">Büyük şüpheli düğme %100 güvenlidir!</div>
+
+        <h2>Adım 1: Tıklama Sayısı</h2>
+        <p>Aşağıdaki kuralları sırasıyla oku, <strong>İLK</strong> uyan kuralı uygula:</p>
+        <ol>
+            <li>Düğme <strong>Mavi</strong> ise VE üzerinde "<strong>Detonate</strong>" yazıyorsa: Düğmeye <strong>1 KERE</strong> tıkla.</li>
+            <li>Düğme <strong>Kırmızı</strong> ise: Düğmeye <strong>2 KERE</strong> tıkla.</li>
+            <li>Düğme üzerinde "<strong>Abort</strong>" yazıyorsa: Düğmeye <strong>3 KERE</strong> tıkla.</li>
+            <li>Düğme <strong>Gri</strong> veya <strong>Beyaz</strong> ise: Düğmeye <strong>4 KERE</strong> tıkla.</li>
+        </ol>
+        <p><em>Yukarıdaki işlemi yaptıktan sonra Adım 2'ye geç.</em></p>
+
+        <h2>Adım 2: Yön Tuşu</h2>
+        <ul>
+            <li>Eğer düğmeye <strong>2 kez veya daha az</strong> tıkladıysan: <strong>AŞAĞI OK</strong> tuşuna bas.</li>
+            <li>Eğer düğmeye 2 kezden fazla tıkladıysan: <strong>YUKARI OK</strong> tuşuna bas.</li>
+        </ul>
+        <div class="difficulty">Zorluk: Kolay</div>
+    </div>
+
+    <div id="hex" class="module-card clearfix">
+        <div class="module-img"><img src="hex.jpg" alt="Hex Resmi"></div>
+        <h1>On the Subject of Hexadecimal (Onaltılık)</h1>
+        <p>Ekranda 4 çift karakter vardır. Her çifti aşağıdaki tabloya bakarak <strong>tek bir harfe</strong> çevir. Harfleri boşluk bırakmadan bitişik yaz.</p>
+        
+        <table>
+            <tr><td>61 ➜ a</td><td>66 ➜ f</td><td>6B ➜ k</td><td>70 ➜ p</td><td>75 ➜ u</td><td>7A ➜ z</td></tr>
+            <tr><td>62 ➜ b</td><td>67 ➜ g</td><td>6C ➜ l</td><td>71 ➜ q</td><td>76 ➜ v</td><td></td></tr>
+            <tr><td>63 ➜ c</td><td>68 ➜ h</td><td>6D ➜ m</td><td>72 ➜ r</td><td>77 ➜ w</td><td></td></tr>
+            <tr><td>64 ➜ d</td><td>69 ➜ i</td><td>6E ➜ n</td><td>73 ➜ s</td><td>78 ➜ x</td><td></td></tr>
+            <tr><td>65 ➜ e</td><td>6A ➜ j</td><td>6F ➜ o</td><td>74 ➜ t</td><td>79 ➜ y</td><td></td></tr>
+        </table>
+        <div class="difficulty">Zorluk: Kolay</div>
+    </div>
+
+    <div id="tiles" class="module-card clearfix">
+        <div class="module-img"><img src="tiles.jpg" alt="Tiles Resmi"></div>
+        <h1>On the Subject of Tiles (Karolar)</h1>
+        <p>İki karonun rengini sayıya çevir, <strong>TOPLA</strong> ve sonucu kutuya yazıp gönder.</p>
+        
+        <table>
+            <tr>
+                <th style="color:red">Kırmızı (Red)</th>
+                <th style="color:green">Yeşil (Green)</th>
+                <th style="color:blue">Mavi (Blue)</th>
+                <th style="color:#d4d400">Sarı (Yellow)</th>
+                <th style="color:hotpink">Pembe (Pink)</th>
+                <th style="border:1px solid #ccc">Beyaz (White)</th>
+            </tr>
+            <tr>
+                <td>1</td><td>9</td><td>7</td><td>2</td><td>6</td><td>5</td>
+            </tr>
+        </table>
+        <p><em>Örn: Kırmızı(1) ve Sarı(2) ise, cevap 3'tür.</em></p>
+        <div class="difficulty">Zorluk: Kolay</div>
+    </div>
+
+    <div id="keypads" class="module-card clearfix">
+        <div class="module-img"><img src="keypads.jpg" alt="Keypad Resmi"></div>
+        <h1>On the Subject of Keypads (Tuş Takımı)</h1>
+        <div class="flavor-text">Basit cebir bilmeyenleri eler.</div>
+        
+        <p>Her bir butonu tek tek kontrol edip bir <strong>X</strong> sayısı elde etmelisin.</p>
+
+        <div class="step-box">
+            <h3>Buton 1 (İlk X Değeri):</h3>
+            <ul>
+                <li>Etiket 10'dan küçükse: <strong>X = 15</strong></li>
+                <li>Değilse, 10 ile 20 arasındaysa: <strong>X = 20</strong></li>
+                <li>Değilse, 20 ile 80 arasındaysa: <strong>X = 30</strong></li>
+                <li>Hiçbiri değilse: <strong>X = 10</strong></li>
+            </ul>
+        </div>
+
+        <div class="step-box">
+            <h3>Buton 2 (İşlem):</h3>
+            <ul>
+                <li>Etiket 10'dan küçükse: <strong>X'e 10 ekle</strong></li>
+                <li>Değilse, 10 ile 20 arasındaysa: <strong>X'i 2 ile çarp</strong></li>
+                <li>Değilse, 20 ile 80 arasındaysa: <strong>X'i 3 ile çarp</strong></li>
+                <li>Hiçbiri değilse: <strong>X'ten 10 çıkar</strong></li>
+            </ul>
+        </div>
+
+        <div class="step-box">
+            <h3>Buton 3 (İşlem):</h3>
+            <ul>
+                <li>Etiket 10'dan küçükse: <strong>X'i 2 ile çarp</strong></li>
+                <li>Değilse, 10 ile 20 arasındaysa: <strong>X'i 3 ile çarp</strong></li>
+                <li>Değilse, 20 ile 80 arasındaysa: <strong>X'ten 5 çıkar</strong></li>
+                <li>Hiçbiri değilse: <strong>X aynı kalsın</strong></li>
+            </ul>
+        </div>
+
+        <div class="step-box">
+            <h3>Buton 4 (İşlem):</h3>
+            <ul>
+                <li>Etiket 10'dan küçükse: <strong>X'i 2 ile çarp</strong></li>
+                <li>Değilse, 10 ile 20 arasındaysa: <strong>X'e 20 ekle</strong></li>
+                <li>Değilse, 20 ile 80 arasındaysa: <strong>X'e 50 ekle</strong></li>
+                <li>Hiçbiri değilse: <strong>X'i 3 ile çarp</strong></li>
+            </ul>
+        </div>
+
+        <div class="step-box" style="background:#fffbe6; border:2px solid orange;">
+            <h3>DİKKAT! Son Hesaplama (Z Sayısı):</h3>
+            <ol>
+                <li>Tuşların üzerindeki sayıların hepsini topla. Bu <strong>Y</strong> sayısıdır.</li>
+                <li>Y sayısını <strong>2'ye böl</strong>.</li>
+                <li>Son X değerinden Y'yi çıkar. (<strong>Z = X - Y</strong>).</li>
+            </ol>
+        </div>
+
+        <h3>Z Sayısına Göre Hangi Resme Bakılacak?</h3>
+        <ul>
+            <li><strong>Z ≤ 0</strong> (0 veya negatif) ise: <strong>Resim 1</strong></li>
+            <li><strong>0.5 ile 19.5</strong> arasında ise: <strong>Resim 2</strong></li>
+            <li><strong>20 ile 49.5</strong> arasında ise: <strong>Resim 3</strong></li>
+            <li><strong>50 ile 89.5</strong> arasında ise: <strong>Resim 4</strong></li>
+            <li><strong>Z ≥ 90</strong> (90 veya büyük) ise: <strong>Resim 5</strong></li>
+        </ul>
+        <p><em>(Resimlerdeki 1-2-3-4 sayıları tuşlara basma sırasını gösterir.)</em></p>
+        <div class="difficulty">Zorluk: Zor</div>
+    </div>
+
+    <div id="math" class="module-card clearfix">
+        <div class="module-img"><img src="math.jpg" alt="Math Resmi"></div>
+        <h1>On the Subject of Mathematics (Matematik)</h1>
+        <p>Harfleri rakama çevir. İki çifti sayı olarak düşün ve birbiriyle <strong>ÇARP</strong>.</p>
+        
+        <table>
+            <tr><td>A=1</td><td>B=3</td><td>C=7</td><td>D=2</td><td>E=4</td></tr>
+            <tr><td>F=5</td><td>G=6</td><td>H=0</td><td>I=8</td><td>J=9</td></tr>
+        </table>
+        <p><em>Örnek: Harfler AA ve BB ise -> 11 ve 33. İşlem: 11 x 33 = 363.</em></p>
+        <div class="difficulty">Zorluk: Kolay</div>
+    </div>
+
+    <div id="binary" class="module-card clearfix">
+        <div class="module-img"><img src="binary.jpg" alt="Binary Resmi"></div>
+        <h1>On the Subject of Binary (İkili Sayı)</h1>
+        <p>Yanık Işık = 1 | Sönük Işık = 0.<br>Aşağıdaki listeyi <strong>TEK TEK, YUKARIDAN AŞAĞIYA OKU</strong> ve uyan <strong>İLK</strong> kuralı uygula.</p>
+        
+        <ol>
+            <li>Hiç yanık ışık yoksa: Kırmızıya <strong>1 kez</strong> tıkla.</li>
+            <li>Işık 2 (YANIK) ve Işık 7 (SÖNÜK) ise: Kırmızıya <strong>2 kez</strong> tıkla.</li>
+            <li>Işık 1 ve Işık 2 (ikisi de YANIK) ise: Kırmızıya <strong>3 kez</strong> tıkla.</li>
+            <li>Işık 1 (SÖNÜK) ve Işık 7 (SÖNÜK) ise: Kırmızıya <strong>4 kez</strong> tıkla.</li>
+            <li>Işık 1, 2 ve 3 (hepsi YANIK) ise: Kırmızıya <strong>5 kez</strong> tıkla.</li>
+            <li>Işık 1, 2, 3 ve 4 (hepsi YANIK) ise: Kırmızıya <strong>6 kez</strong> tıkla.</li>
+            <li>3 taneden fazla ışık KAPALIYSA: Kırmızıya <strong>7 kez</strong> tıkla.</li>
+            <li>5 taneden fazla ışık AÇIKSA: Kırmızıya <strong>8 kez</strong> tıkla.</li>
+            <li>Tüm ışıklar AÇIKSA: Kırmızıya <strong>9 kez</strong> tıkla.</li>
+            <li>Hiçbiri uymuyorsa: Kırmızıya <strong>10 kez</strong> tıkla.</li>
+        </ol>
+        <div class="difficulty">Zorluk: Orta</div>
+    </div>
+
+    <div id="color" class="module-card clearfix">
+        <div class="module-img"><img src="color.jpg" alt="Color Code Resmi"></div>
+        <h1>On the Subject of Color Code (Renk Kodu)</h1>
+        
+        <div style="display:flex; justify-content:space-around;">
+            <div style="border:1px solid #000; padding:10px;">
+                <strong>Ekran Harfleri (X Değeri):</strong><br>
+                R = 1<br>
+                G = 3<br>
+                B = 2<br>
+                Y = 3<br>
+                W = 4
+            </div>
+            <div style="border:1px solid #000; padding:10px;">
+                <strong>Işık Renkleri (Y Değeri):</strong><br>
+                Kırmızı = 0<br>
+                Yeşil = 0<br>
+                Mavi = 1<br>
+                Sarı = 2<br>
+                Beyaz = 3
+            </div>
+        </div>
+        
+        <h3>Formül: X - Y = Basma Sayısı</h3>
+        <ul>
+            <li>Ekrandaki harflerin toplamı (X) eksi Işıkların toplamı (Y).</li>
+            <li>Çıkan sonuç kadar <strong>Kırmızı</strong> butona bas. Sonra <strong>Yeşil</strong> butona bas.</li>
+            <li><strong>DİKKAT:</strong> Eğer sonuç <strong>0 veya Negatif</strong> çıkarsa, Kırmızıya hiç basma, direkt Yeşile bas.</li>
+        </ul>
+        <div class="difficulty">Zorluk: Orta</div>
+    </div>
+
+    <div id="multi" class="module-card clearfix">
+        <div class="module-img"><img src="multi.jpg" alt="Multi Buttons Resmi"></div>
+        <h1>On the Subject of Multi Buttons (Çoklu Düğme)</h1>
+        <p>6 haneli sayıya bak. Her sütunda basılacak <strong>İLK</strong> düğmeyi bulmak için kuralları uygula.</p>
+
+        <div class="step-box">
+            <h3>Sütun 1:</h3>
+            <ul>
+                <li>1. Sayı 6'dan küçükse: <strong>Kırmızı</strong> düğmeye bas.</li>
+                <li>Değilse: <strong>Turuncu</strong> düğmeye bas.</li>
+            </ul>
+        </div>
+        <div class="step-box">
+            <h3>Sütun 2:</h3>
+            <ul>
+                <li>2. Sayı 6'dan küçükse: <strong>Sarı</strong> düğmeye bas.</li>
+                <li>Değilse: <strong>Yeşil</strong> düğmeye bas.</li>
+            </ul>
+        </div>
+        <div class="step-box">
+            <h3>Sütun 3:</h3>
+            <ul>
+                <li>3. Sayı 6'dan küçükse: <strong>Mavi</strong> düğmeye bas.</li>
+                <li>Değilse: <strong>Mor</strong> düğmeye bas.</li>
+            </ul>
+        </div>
+
+        <h3>Kalan 3 Düğmeye Hangi Sırada Basılacak?</h3>
+        <ul>
+            <li>Eğer 4. Sayı 7'den küçükse: Sırasıyla <strong>2. sütundaki, 3. sütundaki, 1. sütundaki</strong> kalan düğmeye bas.</li>
+            <li>Eğer 5. Sayı 7'den küçükse: Sırasıyla <strong>3. sütundaki, 2. sütundaki, 1. sütundaki</strong> kalan düğmeye bas.</li>
+            <li>Eğer 6. Sayı 5'ten büyükse: Soldan sağa doğru bas (<strong>1., 2., 3. sütun</strong>).</li>
+            <li>Hiçbiri değilse: Sırasıyla <strong>1. sütundaki, 3. sütundaki, 2. sütundaki</strong> kalan düğmeye bas.</li>
+        </ul>
+        <div class="difficulty">Zorluk: Orta</div>
+    </div>
+
+    <div id="morse" class="module-card clearfix">
+        <div class="module-img"><img src="morse.jpg" alt="Morse Resmi"></div>
+        <h1>On the Subject of Morse Code (Mors Kodu)</h1>
+        <div class="flavor-text">Yanıp sönen ışık 5 harfli bir kelimedir.</div>
+
+        <table style="font-size:0.9em">
+            <tr><td>A • -</td><td>G - - •</td><td>M - -</td><td>S • • •</td><td>Y - • - -</td></tr>
+            <tr><td>B - • • •</td><td>H • • • •</td><td>N - •</td><td>T -</td><td>Z - - • •</td></tr>
+            <tr><td>C - • - •</td><td>I • •</td><td>O - - -</td><td>U • • -</td><td></td></tr>
+            <tr><td>D - • •</td><td>J • - - -</td><td>P • - - •</td><td>V • • • -</td><td></td></tr>
+            <tr><td>E •</td><td>K - • -</td><td>Q - - • -</td><td>W • - -</td><td></td></tr>
+            <tr><td>F • • - •</td><td>L • - • •</td><td>R • - •</td><td>X - • • -</td><td></td></tr>
+        </table>
+
+        <h3>Hangi Butona Basmalı?</h3>
+        <p>Bombanın üzerindeki <strong>SERİ NUMARASINA</strong> bak. Aşağıdaki tabloyu <strong>SOLDAN SAĞA</strong> oku. Seri numarasında o karakter varsa ilgili renge tıkla.</p>
+        
+        <table>
+            <tr>
+                <th>Aranan Karakter</th>
+                <th>Tıklanacak Renk</th>
+            </tr>
+            <tr><td>A Harfi varsa</td><td>SARI (Yellow)</td></tr>
+            <tr><td>6 Rakamı varsa</td><td>MAVİ (Blue)</td></tr>
+            <tr><td>D Harfi varsa</td><td>MAVİ (Blue)</td></tr>
+            <tr><td>8 Rakamı varsa</td><td>MAVİ (Blue)</td></tr>
+            <tr><td>I (Iğdır) Harfi varsa</td><td>SARI (Yellow)</td></tr>
+            <tr><td>1 Rakamı varsa</td><td>SARI (Yellow)</td></tr>
+        </table>
+        <p><strong>Eğer yukarıdakilerin HİÇBİRİ yoksa: MAVİ (Blue) butona tıkla.</strong></p>
+        <div class="difficulty">Zorluk: Extreme</div>
+    </div>
+
+    <div id="timing" class="module-card clearfix">
+        <div class="module-img"><img src="timing.jpg" alt="Timing Resmi"></div>
+        <h1>On the Subject of Timing (Zamanlama)</h1>
+        <p>Ekranda sayı çifti ve harf çifti vardır. Yeşil butona <strong>ışık doğru renkteyken</strong> basmalısın.</p>
+
+        <ol>
+            <li><strong>Sayı Çifti:</strong> İlk rakam ile ikinci rakamı topla. Bu <strong>X</strong> sayısıdır.</li>
+            <li><strong>Harf Çifti:</strong> Aşağıdaki tabloyu kullanarak harfleri rakama çevir.</li>
+        </ol>
+        
+        <table style="width:50%; margin:0 auto;">
+            <tr><td>A = 4</td><td>B = 3</td><td>C = 7</td><td>D = 9</td></tr>
+        </table>
+
+        <ol start="3">
+            <li><strong>Y Sayısı:</strong> Harflerden elde ettiğin iki rakamı <strong>TOPLA</strong>.<br><em>(Örn: BA ise, 3+4=7 olur. 34 olmaz.)</em></li>
+            <li><strong>Z Sayısı:</strong> X ile Y'yi çarp (<strong>Z = X * Y</strong>).</li>
+            <li>Aşağıdaki tablodan Z sayısına karşılık gelen rengi bul.</li>
+        </ol>
+
+        <table>
+            <tr><th>Z Değeri</th><th>Işık Rengi</th></tr>
+            <tr><td>0 - 59</td><td>Beyaz</td></tr>
+            <tr><td>60 - 99</td><td>Kırmızı</td></tr>
+            <tr><td>100 - 199</td><td>Sarı</td></tr>
+            <tr><td>200 - 299</td><td>Yeşil</td></tr>
+            <tr><td>300 - 399</td><td>Mavi</td></tr>
+            <tr><td>400 - 499</td><td>Sarı</td></tr>
+            <tr><td>500 - 599</td><td>Kırmızı</td></tr>
+            <tr><td>600 ve üzeri</td><td>Beyaz</td></tr>
+        </table>
+        <div class="difficulty">Zorluk: Orta</div>
+    </div>
+
+    <div id="divisibility" class="module-card clearfix">
+        <div class="module-img"><img src="divisibility.jpg" alt="Divisibility Resmi"></div>
+        <h1>On the Subject of Divisibility (Bölünebilirlik)</h1>
+        <div class="flavor-text">Böl ve yönet. Modül 3 aşamalıdır. Her aşamada sayı büyür.</div>
+        
+        <p>Ekranda çıkan sayıyı kontrol et:</p>
+        <ul>
+            <li>Sayı 2'ye tam bölünüyor mu? (Çift sayı mı?)</li>
+            <li>Sayı 3'e tam bölünüyor mu? (Rakamları toplamı 3'ün katı mı?)</li>
+            <li>Sayı 5'e tam bölünüyor mu? (Sonu 0 veya 5 mi?)</li>
+            <li>Sayı 7'ye tam bölünüyor mu?</li>
+        </ul>
+        <p><strong>Modülün üzerindeki Venn Şeması resmine bak.</strong> Sayının bölünebildiği kuralların kesiştiği harfi bul ve o harfin butonuna bas.</p>
+        <p><em>(İpucu: Hesap makinesindeki % modül tuşunu kullanabilirsin.)</em></p>
+        <div class="difficulty">Zorluk: Zor</div>
+    </div>
+
+    <div id="needy" class="module-card clearfix">
+        <div class="module-img"><img src="needy.jpg" alt="Needy Resmi"></div>
+        <h1 style="color:#d32f2f;">Needy Modules (İlgi İsteyenler)</h1>
+        <div class="flavor-text">Bu modüller tamamen çözülmez. Zaman zaman tekrar aktif olur ve bip sesi çıkarır. Süre bitmeden müdahale etmelisin.</div>
+
+        <div class="step-box">
+            <h2 style="color:#d32f2f">1. Echo (Eko)</h2>
+            <p>En üst ekranda yazan sayıyı, ortadaki kutuya <strong>aynen yaz</strong> ve Yeşil butona bas.</p>
+        </div>
+
+        <div class="step-box">
+            <h2 style="color:#d32f2f">2. Counting (Sayma)</h2>
+            <p>Zamanlayıcının üzerindeki dikdörtgen ışığa bak:</p>
+            <ul>
+                <li>Dikdörtgen Işık <strong>YANIYORSA (Lit)</strong>: Küçük karelerden <strong>YANANLARI</strong> say ve sayıyı gir.</li>
+                <li>Dikdörtgen Işık <strong>SÖNÜKSE (Unlit)</strong>: Küçük karelerden <strong>SÖNÜK</strong> olanları say ve sayıyı gir.</li>
+            </ul>
+        </div>
+
+        <div class="step-box">
+            <h2 style="color:#d32f2f">3. Interview (Mülakat)</h2>
+            <p>Üst ekranda sana bir soru sorulacak. Cevabını aşağıdaki kutuya yaz ve gönder.</p>
+        </div>
+        <div class="difficulty">Zorluk: Kolay (ama dikkat dağıtıcı)</div>
+    </div>
+
+</div>
+
+</body>
+</html>
